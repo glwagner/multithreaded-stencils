@@ -1,6 +1,11 @@
 # multithreaded-stencils
-Benchmarks for multithreaded, looped, three-dimensional stencil computations 
 
+First, a sanity check that the stencils work (and we get some diffusion):
+
+![image](https://user-images.githubusercontent.com/15271942/126853537-220f146e-7945-4dd3-8d31-eed50bdb208e.png)
+
+Next, benchmarks for multithreaded, looped, three-dimensional stencil computations (KA stands for 
+"[KernelAbstractions](https://github.com/JuliaGPU/KernelAbstractions.jl)"):
 
 ```
 

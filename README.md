@@ -2,6 +2,7 @@
 
 This repo implements multithreaded three-dimensional loops over simple three-dimensional Laplacian
 stencil calculations in Julia, using both `Base.Threads.@threads` and [`KernelAbstractions.jl`](https://github.com/JuliaGPU/KernelAbstractions.jl).
+It borrows some tools from [`Oceananigans.jl`](https://github.com/CliMA/Oceananigans.jl) for benchmarking.
 
 First, a sanity check that the stencils work (and we get some diffusion):
 

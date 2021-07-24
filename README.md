@@ -61,3 +61,10 @@ Next, benchmarks for multithreaded, looped, three-dimensional stencil computatio
 │  512 │      48 │ 6.10799 │ 10.5943 │ 13.2078 │
 └──────┴─────────┴─────────┴─────────┴─────────┘
 ```
+
+## Key points:
+
+1. `Base.Threads.@threads` is faster than `KernelAbstractions` every time.
+2. `Base.Threads.@threads` is nearly 2x as fast on a single thread.
+3. `Base.Threads.@threads` saturates at 16 threads (for this 512^3 problem) and slows down afterwards. 512^3 is _huge_ (though the stencil is simple).
+4. `KernelAbstractions` speeds up monotonically, but is still slower with 48 threads than `Base.Threads.@threads` with 16 threads.

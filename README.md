@@ -1,13 +1,16 @@
 # multithreaded-stencils
 
+This repo implements multithreaded three-dimensional loops over simple three-dimensional Laplacian
+stencil calculations in Julia, using both `Base.Threads.@threads` and [`KernelAbstractions.jl`](https://github.com/JuliaGPU/KernelAbstractions.jl).
+
 First, a sanity check that the stencils work (and we get some diffusion):
 
 ![image](https://user-images.githubusercontent.com/15271942/126853537-220f146e-7945-4dd3-8d31-eed50bdb208e.png)
 
-Next, benchmarks for multithreaded, looped, three-dimensional stencil computations (KA stands for 
-"[KernelAbstractions](https://github.com/JuliaGPU/KernelAbstractions.jl)"). Note that "`size=512`" means
-`Nx = Ny = Nz = 512`, or a total size `512^3 = 134217728`. This is realistic or even somewhat large
-(and therefore favorable for multithreading) with respect to typical fluid dynamics computations.
+Next, benchmarks for multithreaded, looped, three-dimensional stencil computations (KA = `KernelAbstractions.jl`).
+Note that "`size=512`" means `Nx = Ny = Nz = 512`, or a total size `512^3 = 134217728`.
+This is realistic or even somewhat large (and therefore favorable for multithreading) with respect to typical
+fluid dynamics computations.
 
 ```
 

@@ -1,6 +1,9 @@
 # multithreaded-stencils
 Benchmarks for multithreaded, looped, three-dimensional stencil computations 
 
+
+```
+
                                      KA multithreading benchmarks
 ┌──────┬─────────┬────────────┬────────────┬────────────┬────────────┬────────────┬────────┬─────────┐
 │ size │ threads │        min │     median │       mean │        max │     memory │ allocs │ samples │
@@ -52,3 +55,4 @@ Benchmarks for multithreaded, looped, three-dimensional stencil computations
 │  512 │      32 │ 6.07314 │ 7.36226 │ 9.22078 │
 │  512 │      48 │ 6.10799 │ 10.5943 │ 13.2078 │
 └──────┴─────────┴─────────┴─────────┴─────────┘
+```

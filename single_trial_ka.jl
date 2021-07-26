@@ -20,7 +20,7 @@ nthreads = Base.Threads.nthreads()
 trials = Dict()
 
 for workgroup in workgroups
-    ∇²_KA!(∇²ϕ, ϕ, workgroups)
+    ∇²_KA!(∇²ϕ, ϕ, workgroup)
 
     @info "Benchmarking KernelAbstractions on $nthreads threads with workgroup $workgroup"
     

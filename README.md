@@ -11,7 +11,7 @@ First, a sanity check that the stencils work (and we get some diffusion):
 Next, running
 
 ```julia
-julia> include("benchmark_multithreading.jl")
+julia> include("benchmark_suite_ka_vs_base.jl")
 ```
 
 performs benchmarks for multithreaded, looped, three-dimensional stencil computations (KA = `KernelAbstractions.jl`).

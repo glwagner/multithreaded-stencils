@@ -20,10 +20,16 @@ nthreads = Base.Threads.nthreads()
 trials = Dict()
 
 for group in workgroups
+    @info "Benchmarking KernelAbstractions on $nthreads threads with workgroup $group"
+
+    @info "Compiling KernelAbstractions Lapacian kernel..."
+    start_time = time_ns()
+
     ∇²_KA!(∇²ϕ, ϕ, group)
 
-    @info "Benchmarking KernelAbstractions on $nthreads threads with workgroup $group"
-    
+    compute_time = (time_ns() - start_time) * 1e-9
+    @info "    ... compilation + one kernel launch took $compute_time seconds."
+
     KA_trial = @benchmark begin
         ∇²_KA!(∇²ϕ, ϕ, $group)
     end samples=10

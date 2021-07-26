@@ -10,9 +10,12 @@ n_threads = min.(2 .^ (0:10), Sys.CPU_THREADS) |> unique
 # Run and collect benchmarks
 
 for t in n_threads
-    @info "Benchmarking KernelAbstractions versus Base.Threads multithreading (N=$N, threads=$t)..."
+    @info "Benchmarking Base.Threads multithreading (N=$N, threads=$t)..."
     julia = Base.julia_cmd()
     run(`$julia -t $t --project single_trial_base_threads.jl $N`)
+
+    @info "Benchmarking KernelAbstractions multithreading (N=$N, threads=$t)..."
+    julia = Base.julia_cmd()
     run(`$julia -t $t --project single_trial_ka.jl $N`)
 end
 

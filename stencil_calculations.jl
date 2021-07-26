@@ -25,12 +25,11 @@ function _∇²_base_threads!(∇²f, grid, f)
     return nothing
 end
 
-function ∇²_KA!(∇²ϕ, ϕ)
+function ∇²_KA!(∇²ϕ, ϕ, workgroup=(ϕ.grid.Nx, ϕ.grid.Ny))
     arch = ϕ.architecture
     grid = ϕ.grid
 
     Nx, Ny, Nz = worksize = size(grid)
-    workgroup = (16, 16)
 
     fill_halo_regions!(ϕ, arch)
     loop! = _∇²_KA!(device(arch), workgroup, worksize)

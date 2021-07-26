@@ -10,9 +10,6 @@ grid = RegularRectilinearGrid(size=(Nx, Ny, Nz), extent=(2π, 2π, 2π))
 ϕ = CenterField(CPU(), grid)
 ∇²ϕ = CenterField(CPU(), grid)
 
-ϕ = CenterField(CPU(), grid)
-∇²ϕ = CenterField(CPU(), grid)
-
 set!(ϕ, (x, y, z) -> randn())
 
 Δt = 1e-4

@@ -1,6 +1,23 @@
 # multithreaded-stencils
-Benchmarks for multithreaded, looped, three-dimensional stencil computations 
 
+This repo implements multithreaded three-dimensional loops over simple three-dimensional Laplacian
+stencil calculations in Julia, using both `Base.Threads.@threads` and [`KernelAbstractions.jl`](https://github.com/JuliaGPU/KernelAbstractions.jl).
+It borrows some tools from [`Oceananigans.jl`](https://github.com/CliMA/Oceananigans.jl) for benchmarking.
+
+First, a sanity check that the stencils work (and we get some diffusion):
+
+![image](https://user-images.githubusercontent.com/15271942/126853537-220f146e-7945-4dd3-8d31-eed50bdb208e.png)
+
+Next, running
+
+```julia
+julia> include("benchmark_multithreading.jl")
+```
+
+performs benchmarks for multithreaded, looped, three-dimensional stencil computations (KA = `KernelAbstractions.jl`).
+Note that "`size=512`" means `Nx = Ny = Nz = 512`, or a total size `512^3 = 134217728`.
+This is realistic or even somewhat large (and therefore favorable for multithreading) with respect to typical
+fluid dynamics computations. The results:
 
 ```
 
@@ -56,3 +73,10 @@ Benchmarks for multithreaded, looped, three-dimensional stencil computations
 │  512 │      48 │ 6.10799 │ 10.5943 │ 13.2078 │
 └──────┴─────────┴─────────┴─────────┴─────────┘
 ```
+
+## Key points:
+
+1. `Base.Threads.@threads` is faster than `KernelAbstractions` every time.
+2. `Base.Threads.@threads` is nearly 2x as fast on a single thread.
+3. `Base.Threads.@threads` saturates at 16 threads (for this 512^3 problem) and slows down afterwards. 512^3 is _huge_ (though the stencil is simple).
+4. `KernelAbstractions` speeds up monotonically, but is still slower with 48 threads than `Base.Threads.@threads` with 16 threads.

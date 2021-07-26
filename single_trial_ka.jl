@@ -19,16 +19,16 @@ nthreads = Base.Threads.nthreads()
 
 trials = Dict()
 
-for workgroup in workgroups
-    ∇²_KA!(∇²ϕ, ϕ, workgroup)
+for group in workgroups
+    ∇²_KA!(∇²ϕ, ϕ, group)
 
-    @info "Benchmarking KernelAbstractions on $nthreads threads with workgroup $workgroup"
+    @info "Benchmarking KernelAbstractions on $nthreads threads with workgroup $group"
     
     KA_trial = @benchmark begin
-        ∇²_KA!(∇²ϕ, ϕ, workgroup)
+        ∇²_KA!(∇²ϕ, ϕ, $group)
     end samples=10
 
-    trials[workgroup] = KA_trial
+    trials[group] = KA_trial
 end
 
 bson("multithreading_benchmark_KernelAbstractions_$nthreads.bson", trials)
